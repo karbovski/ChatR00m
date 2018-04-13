@@ -17,25 +17,8 @@ public class LoginActivity extends AppCompatActivity {
     public void joinChatOnClick(View view) {
 
         Intent intent = new Intent(this, MainActivity.class);
-
-
-    }
-
-    public void ReadInt()
-    {
-
-        String name = "Dominik";
-        //jeg vil ha den koden med
-        int y=40;
-        y++;
-        int x = 5;
-
-        //commit som skal til master
-
-        //her er Dominik sin branch
-
-        if(y<50) Log.i("Login","HEi");
-        //Ole sin branch
+        startActivity(intent);
 
     }
+
 }
