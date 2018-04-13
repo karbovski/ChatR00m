@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="265dp"
+        android:layout_height="196dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:paddingBottom="30dp"
+        app:srcCompat="@drawable/group" />
+
+    <EditText
+        android:id="@+id/serverIPText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Server IP"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/usernameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/passwordText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password (optional)"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/loginButtton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="joinChatOnClick"
+        android:text="Join chat" />
+
+</LinearLayout>
