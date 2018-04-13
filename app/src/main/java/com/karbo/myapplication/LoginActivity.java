@@ -24,5 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     public void ReadInt()
     {
 
+        String name = "Dominik";
+        //jeg vil ha den koden med
     }
 }
