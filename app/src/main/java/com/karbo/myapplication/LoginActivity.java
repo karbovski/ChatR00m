@@ -32,5 +32,10 @@ public class LoginActivity extends AppCompatActivity {
 
         //commit som skal til master
 
+        //her er Dominik sin branch
+
+        if(y<50) Log.i("Login","HEi");
+        //Ole sin branch
+
     }
 }
