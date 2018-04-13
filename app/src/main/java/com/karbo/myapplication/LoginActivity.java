@@ -30,5 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         y++;
         int x = 5;
 
+        //her er Dominik sin branch
+
     }
 }
