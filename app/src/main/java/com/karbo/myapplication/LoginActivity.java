@@ -30,7 +30,5 @@ public class LoginActivity extends AppCompatActivity {
         y++;
         int x = 5;
 
-        //commit som skal til master
-
     }
 }
