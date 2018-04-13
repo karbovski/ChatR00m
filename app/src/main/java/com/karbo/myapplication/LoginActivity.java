@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         //jeg vil ha den koden med
         int y=40;
         y++;
+        int x = 5;
 
     }
 }
