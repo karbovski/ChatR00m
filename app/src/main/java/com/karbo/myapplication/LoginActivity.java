@@ -17,18 +17,8 @@ public class LoginActivity extends AppCompatActivity {
     public void joinChatOnClick(View view) {
 
         Intent intent = new Intent(this, MainActivity.class);
-
-
-    }
-
-    public void ReadInt()
-    {
-
-        String name = "Dominik";
-        //jeg vil ha den koden med
-        int y=40;
-        y++;
-        int x = 5;
+        startActivity(intent);
 
     }
+
 }
