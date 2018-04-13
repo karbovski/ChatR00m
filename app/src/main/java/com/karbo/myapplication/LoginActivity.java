@@ -3,6 +3,7 @@ package com.karbo.myapplication;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 public class LoginActivity extends AppCompatActivity {
@@ -31,6 +32,9 @@ public class LoginActivity extends AppCompatActivity {
         int x = 5;
 
         //her er Dominik sin branch
+
+        if(y<50) Log.i("Login","HEi");
+        //Ole sin branch
 
     }
 }
