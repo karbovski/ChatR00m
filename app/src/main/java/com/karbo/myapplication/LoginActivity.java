@@ -23,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void ReadInt()
     {
-
+        int y=40;
+        y++;
+        
     }
 }
