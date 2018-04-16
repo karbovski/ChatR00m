@@ -16,6 +16,11 @@ public class LoginActivity extends AppCompatActivity {
 
     public void joinChatOnClick(View view) {
 
+
+        // TODO kode som skal validere input fra user og vise en toast hvis noe e galt
+
+        // TODO kode som skal starte en service
+
         Intent intent = new Intent(this, MainActivity.class);
 
         startActivity(intent);

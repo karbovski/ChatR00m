@@ -4,12 +4,22 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
+import java.net.Socket;
+
+
 public class ChatService extends Service {
+
+    private static Socket chatSocket;
+
+
+
     public ChatService() {
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        //intent.getStringExtra() for å få ip og port fra activity
 
         //TODO: her kan vi legge kode som lytter på socketen, og det kan vi putte i en vanlig java thread
 

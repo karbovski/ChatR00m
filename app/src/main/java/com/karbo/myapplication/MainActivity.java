@@ -43,4 +43,7 @@ public class MainActivity extends AppCompatActivity {
             // nymelding > vis den på skjermen
         }
     }
+
+
+
 }
