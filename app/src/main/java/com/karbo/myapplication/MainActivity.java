@@ -24,15 +24,23 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(new MessageReceiver(), intentFilter);
     }
 
+
+
     private class MessageReceiver extends BroadcastReceiver{
 
         @Override
         public void onReceive(Context context, Intent intent) {
             // TODO koden som skal utføres når en broadcast ble mottat
 
-            // her hentes det .putExtra fieldene fra intent 
+            // her hentes det .putExtra fieldene fra intent fra broadcast
             String username = intent.getStringExtra("username");
             String messageText = intent.getStringExtra("messageText");
+
+            // TODO kode som oppretter ny booble på skjermen og seter inn username:messageText
+            // something like
+            // TextView nymelding = new Textview...
+            // nymelding.setText(username + messageText)
+            // nymelding > vis den på skjermen
         }
     }
 }

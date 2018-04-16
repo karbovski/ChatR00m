@@ -11,7 +11,9 @@ public class ChatService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        //TODO: her kan vi legge kode som lytter på socketen, det kan vi putte i en vanlig java thread
+        //TODO: her kan vi legge kode som lytter på socketen, og det kan vi putte i en vanlig java thread
+
+        // TODO multithread: by default kjøres service i samme thread med UI så vi må ha flere threads to do it legit
 
         /* while(true){
         socket.listen()
