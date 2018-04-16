@@ -13,6 +13,12 @@ public class ChatService extends Service {
 
         //TODO: her kan vi legge kode som lytter på socketen, det kan vi putte i en vanlig java thread
 
+        /* while(true){
+        socket.listen()
+        readline > sendChatMessageAsBroadcast
+        }
+         */
+
 
         // START_STICKY gjør at service kjører i evighet, ikke spør meg hvorfor
         return START_STICKY;
