@@ -46,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
             // something like
             // TextView nymelding = new Textview...
             // nymelding.setText(username + messageText)
+            // newmessage = findbyidres(R.layout.message)
+            //newmessage.SETTEXT(messageText + " : " username)
+            // textAlignmen.set Right/lEFT (mine og noen andres meldinger)
+            // layout.addView(new message)
             // nymelding > vis den på skjermen
         }
     }
