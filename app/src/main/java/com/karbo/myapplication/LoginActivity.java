@@ -53,13 +53,11 @@ public class LoginActivity extends AppCompatActivity {
                 SocketHandler.socket=new Socket(serverIPText.getText().toString(),Integer.parseInt(portText.getText().toString()));
                 connected=true;
             } catch (IOException e) {
-                Toast toast= Toast.makeText(getApplicationContext(),"Could not connect to server",Toast.LENGTH_LONG);
-                toast.show();
+
                 e.printStackTrace();
                 // TODO vise toast at enten IP eller port må sjekkes
             }catch (NumberFormatException e) {
-                Toast toast= Toast.makeText(getApplicationContext(),"Invalid Port Number",Toast.LENGTH_LONG);
-                toast.show();
+
                 e.printStackTrace();
                 // TODO kan vise toast her som sier at port nummer er invalid
             }
@@ -71,6 +69,11 @@ public class LoginActivity extends AppCompatActivity {
             if(connected) {
                 startMainActivity();
             }
+            else{
+                Toast toast= Toast.makeText(getApplicationContext(),"Could not connect to server",Toast.LENGTH_LONG);
+                toast.show();
+            }
+
            
 
             super.onPostExecute(aVoid);
