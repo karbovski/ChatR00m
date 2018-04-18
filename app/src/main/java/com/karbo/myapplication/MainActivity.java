@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,12 +18,14 @@ import java.io.PrintWriter;
 public class MainActivity extends AppCompatActivity {
 
     EditText messageText;
+    LinearLayout messagesLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         messageText=findViewById(R.id.messageText);
+        messagesLayout = findViewById(R.id.messagesLayout);
 
         // TODO sjekke om Socket er NULL, hvis ja > gå tilbake til pålogingside ??? kanskje
         //TODO startService
@@ -52,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
             // her hentes det .putExtra fieldene fra intent fra broadcast
             String username = intent.getStringExtra("username");
             String messageText = intent.getStringExtra("messageText");
+
+            TextView newMessage = new TextView(context);
+            newMessage.setText(username + ": " + messageText);
+            messagesLayout.addView(newMessage);
 
             // TODO kode som oppretter ny booble på skjermen og seter inn username:messageText
             // something like
