@@ -71,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(String... strings) {
 
-            SocketHandler.out.println(strings);
+            SocketHandler.out.println(strings[0]);
+            SocketHandler.out.flush();
             return null;
         }
     }
