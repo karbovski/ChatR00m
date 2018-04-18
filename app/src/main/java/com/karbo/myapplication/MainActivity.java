@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         messageText=findViewById(R.id.messageText);
 
         // TODO sjekke om Socket er NULL, hvis ja > gå tilbake til pålogingside ??? kanskje
-
+        //TODO startService
         // ny intent filter
         IntentFilter intentFilter = new IntentFilter();
 

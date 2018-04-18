@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
+import java.io.IOException;
 import java.net.Socket;
 
 
@@ -20,6 +21,25 @@ public class ChatService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         //intent.getStringExtra() for å få ip og port fra activity
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while(true)
+                    {
+                        String rawMessage = SocketHandler.in.readLine();
+                        int colonPosition=rawMessage.indexOf(':');
+
+                        String username=rawMessage.substring(0,colonPosition);
+                        String message=rawMessage.substring(colonPosition+1);
+                        sendChatMessageAsBroadcast(username,message);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
 
         //TODO: her kan vi legge kode som lytter på socketen, og det kan vi putte i en vanlig java thread
 

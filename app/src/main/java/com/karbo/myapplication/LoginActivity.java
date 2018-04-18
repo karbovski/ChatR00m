@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void joinChatOnClick(View view) {
 
+        //TODO:Sjekk om username inneholder :
         new connectToHost().execute();
     }
 
