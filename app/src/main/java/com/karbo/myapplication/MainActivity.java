@@ -7,16 +7,21 @@ import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class MainActivity extends AppCompatActivity {
 
+    EditText messageText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        messageText=findViewById(R.id.messageText);
 
         // TODO sjekke om Socket er NULL, hvis ja > gå tilbake til pålogingside ??? kanskje
 
@@ -28,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
 
         // her må vi sette en BroadcastReciver (som gjør noe etter broadcast ble mottat) og en intenfilter for å filtrere etter broadcast
         registerReceiver(new MessageReceiver(), intentFilter);
+    }
+
+    public void sendClick(View view)
+    {
+        String message=messageText.getText().toString();
+        new sendMessage().execute(message);
     }
 
 
@@ -59,16 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(String... strings) {
-            try {
-                PrintWriter out = new PrintWriter( SocketHandler.socket.getOutputStream() );
-                out.println(strings);
-            } catch (IOException e){
 
-            }
-
-
-
-
+            SocketHandler.out.println(strings);
             return null;
         }
     }

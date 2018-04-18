@@ -166,7 +166,7 @@
         android:fitsSystemWindows="true">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/messageText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -178,6 +178,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="sendClick"
             android:text="Send" />
     </LinearLayout>
 
