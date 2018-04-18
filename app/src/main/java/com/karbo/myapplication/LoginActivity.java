@@ -55,8 +55,10 @@ public class LoginActivity extends AppCompatActivity {
                 connected=true;
             } catch (IOException e) {
                 e.printStackTrace();
+                // TODO vise toast at enten IP eller port må sjekkes
             }catch (NumberFormatException e) {
                 e.printStackTrace();
+                // TODO kan vise toast her som sier at port nummer er invalid
             }
             return null;
         }

@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // TODO sjekke om Socket er NULL, hvis ja > gå tilbake til pålogingside ??? kanskje
+
         // ny intent filter
         IntentFilter intentFilter = new IntentFilter();
 
