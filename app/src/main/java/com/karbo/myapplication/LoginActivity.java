@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         portText=findViewById(R.id.portText);
         connected=false;
 
-
     }
 
 
@@ -54,8 +53,12 @@ public class LoginActivity extends AppCompatActivity {
                 SocketHandler.socket=new Socket(serverIPText.getText().toString(),Integer.parseInt(portText.getText().toString()));
                 connected=true;
             } catch (IOException e) {
+                Toast toast= Toast.makeText(getApplicationContext(),"Could not connect to server",Toast.LENGTH_LONG);
+                toast.show();
                 e.printStackTrace();
             }catch (NumberFormatException e) {
+                Toast toast= Toast.makeText(getApplicationContext(),"Invalid Port Number",Toast.LENGTH_LONG);
+                toast.show();
                 e.printStackTrace();
             }
             return null;
@@ -66,10 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             if(connected) {
                 startMainActivity();
             }
-            else {
-                Toast toast= Toast.makeText(getApplicationContext(),"Could not connect to server",Toast.LENGTH_LONG);
-                toast.show();
-            }
+           
 
             super.onPostExecute(aVoid);
         }
