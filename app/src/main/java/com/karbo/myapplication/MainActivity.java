@@ -4,8 +4,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +47,25 @@ public class MainActivity extends AppCompatActivity {
             // TextView nymelding = new Textview...
             // nymelding.setText(username + messageText)
             // nymelding > vis den på skjermen
+        }
+    }
+
+    private class sendMessage extends AsyncTask<String,Void,Void>
+    {
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            try {
+                PrintWriter out = new PrintWriter( SocketHandler.socket.getOutputStream() );
+                out.println(strings);
+            } catch (IOException e){
+
+            }
+
+
+
+
+            return null;
         }
     }
 

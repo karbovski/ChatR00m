@@ -50,7 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) { //Prøver å åpne socket
             try {
-                SocketHandler.socket=new Socket(serverIPText.getText().toString(),Integer.parseInt(portText.getText().toString()));
+                Socket s=new Socket(serverIPText.getText().toString(),Integer.parseInt(portText.getText().toString()));
+                SocketHandler.setSocket(s);
                 connected=true;
             } catch (IOException e) {
                 Toast toast= Toast.makeText(getApplicationContext(),"Could not connect to server",Toast.LENGTH_LONG);
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             if(connected) {
                 startMainActivity();
             }
-           
+
 
             super.onPostExecute(aVoid);
         }
