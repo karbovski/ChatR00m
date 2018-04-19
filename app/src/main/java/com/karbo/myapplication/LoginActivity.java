@@ -82,4 +82,9 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
         }
     }
+
+    public void logoOnClick(View view){
+        Toast toast = Toast.makeText(getApplicationContext(), "Utviklet av Ole og Dominik fra 16HKOM", Toast.LENGTH_LONG);
+        toast.show();
+    }
 }

@@ -14,6 +14,7 @@
         android:layout_height="196dp"
         android:adjustViewBounds="false"
         android:cropToPadding="false"
+        android:onClick="logoOnClick"
         android:paddingBottom="30dp"
         app:srcCompat="@drawable/group" />
 
