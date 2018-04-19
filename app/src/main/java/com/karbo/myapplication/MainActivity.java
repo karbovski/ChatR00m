@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
             newMessage.setText(username + ": " + messageText);
             messagesLayout.addView(newMessage);
 
+            // ny metode med XML mal, just testing
+            addMessageOnScreen(username,messageText);
+
             // TODO kode som oppretter ny booble på skjermen og seter inn username:messageText
             // something like
             // TextView nymelding = new Textview...
@@ -73,8 +76,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class sendMessage extends AsyncTask<String,Void,Void>
-    {
+    private class sendMessage extends AsyncTask<String,Void,Void> {
 
         @Override
         protected Void doInBackground(String... strings) {
@@ -83,6 +85,19 @@ public class MainActivity extends AppCompatActivity {
             SocketHandler.out.flush();
             return null;
         }
+    }
+
+    private void addMessageOnScreen(String username, String messageString){
+        // vi henter XML fra res/layout/message.xml og setter det in i parent layout, i det tilfellet>messagesLayout
+        View message = getLayoutInflater().inflate(R.layout.message, messagesLayout);
+
+        EditText messageEditText = message.findViewById(R.id.messageTextView);
+        EditText usernameEditText = message.findViewById(R.id.usernameTextView);
+
+        usernameEditText.setText(username);
+        messageEditText.setText(messageString);
+
+
     }
 
 
