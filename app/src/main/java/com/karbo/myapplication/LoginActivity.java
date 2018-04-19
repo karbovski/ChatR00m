@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void joinChatOnClick(View view) {
 
-        //TODO:Sjekk om username inneholder :
+        //TODO:Sjekk om username inneholder ':'
         new connectToHost().execute();
     }
 
@@ -52,7 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) { //Prøver å åpne socket
             try {
                 Socket s=new Socket(serverIPText.getText().toString(),Integer.parseInt(portText.getText().toString()));
-                SocketHandler.setSocket(s);
+                String username=usernameText.getText().toString();
+                SocketHandler.setSocket(s,username);
                 connected=true;
             } catch (IOException e) {
 
