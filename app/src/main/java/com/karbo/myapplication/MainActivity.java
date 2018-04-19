@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         // her må vi sette en BroadcastReciver (som gjør noe etter broadcast ble mottat) og en intenfilter for å filtrere etter broadcast
         registerReceiver(new MessageReceiver(), intentFilter);
+        startService(new Intent(getApplicationContext(),ChatService.class));//Starter service. Riktig sted?
     }
 
     public void sendClick(View view)
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
             TextView newMessage = new TextView(context);
             newMessage.setText(username + ": " + messageText);
+            Log.i("Crab2",username+messageText);
             messagesLayout.addView(newMessage);
 
             // ny metode med XML mal, just testing
