@@ -25,10 +25,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        messageText=findViewById(R.id.messageText);
-        messagesLayout = findViewById(R.id.messagesLayout);
 
-        // TODO sjekke om Socket er NULL, hvis ja > gå tilbake til pålogingside ??? kanskje
+        messageText = findViewById(R.id.messageText);
+        messagesLayout = findViewById(R.id.messagesLayout);
 
         // ny intent filter
         IntentFilter intentFilter = new IntentFilter();

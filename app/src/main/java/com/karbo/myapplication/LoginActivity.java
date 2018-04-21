@@ -51,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 Socket socket = new Socket(ipAddress, portNumber);
                 String username = usernameText.getText().toString();
-                SocketHandler.setSocket(socket,username);
-                connected=true;
+                SocketHandler.setSocket(socket, username);
+                connected = true;
             } catch (IOException e) {
                 showToast("Check your IP or port number!");
                 e.printStackTrace();
@@ -67,9 +67,13 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             //Dersom doInBackground lykkes, startes ny activity. Ellers vises en feilmelding som Toast
 
-            if(connected) startMainActivity();
-            else showToast("Could not connect to server.");
-
+            if(connected == true) {
+                startMainActivity();
+            }
+            else {
+                showToast("Could not connect to server.");
+            }
+            
             super.onPostExecute(aVoid);
         }
     }
