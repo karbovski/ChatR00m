@@ -12,7 +12,6 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.net.Socket;
 
-
 public class LoginActivity extends AppCompatActivity {
 
     EditText serverIPText;
@@ -24,13 +23,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        serverIPText=findViewById(R.id.serverIPText);
-        usernameText=findViewById(R.id.usernameText);
-        portText=findViewById(R.id.portText);
-        connected=false;
 
+        serverIPText = findViewById(R.id.serverIPText);
+        usernameText = findViewById(R.id.usernameText);
+        portText = findViewById(R.id.portText);
+        connected = false;
     }
-
 
     public void joinChatOnClick(View view) {
 
@@ -40,51 +38,49 @@ public class LoginActivity extends AppCompatActivity {
 
     private void startMainActivity()
     {
-        //TODO: Start Service
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-
     }
 
     private class connectToHost extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected Void doInBackground(Void... voids) { //Prøver å åpne socket
             try {
-                Socket s=new Socket(serverIPText.getText().toString(),Integer.parseInt(portText.getText().toString()));
-                String username=usernameText.getText().toString();
-                SocketHandler.setSocket(s,username);
+                String ipAddress = serverIPText.getText().toString();
+                int portNumber = Integer.parseInt(portText.getText().toString());
+
+                Socket socket = new Socket(ipAddress, portNumber);
+                String username = usernameText.getText().toString();
+                SocketHandler.setSocket(socket,username);
                 connected=true;
             } catch (IOException e) {
-
+                showToast("Check your IP or port number!");
                 e.printStackTrace();
-                // TODO vise toast at enten IP eller port må sjekkes
-            }catch (NumberFormatException e) {
-
+            } catch (NumberFormatException e) {
+                showToast("Invalid port number.");
                 e.printStackTrace();
-                // TODO kan vise toast her som sier at port nummer er invalid
             }
             return null;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {//Dersom doInBackground lykkes, startes ny activity. Ellers vises en feilmelding som Toast
-            if(connected) {
-                startMainActivity();
-            }
-            else{
-                Toast toast= Toast.makeText(getApplicationContext(),"Could not connect to server",Toast.LENGTH_LONG);
-                toast.show();
-            }
+        protected void onPostExecute(Void aVoid) {
+            //Dersom doInBackground lykkes, startes ny activity. Ellers vises en feilmelding som Toast
 
-
+            if(connected) startMainActivity();
+            else showToast("Could not connect to server.");
 
             super.onPostExecute(aVoid);
         }
     }
 
     public void logoOnClick(View view){
-        Toast toast = Toast.makeText(getApplicationContext(), "Utviklet av Ole og Dominik fra 16HKOM", Toast.LENGTH_LONG);
+        showToast("Utviklet av Ole og Dominik fra 16HKOM");
+    }
+
+    public void showToast(String toastText) {
+        // en metode som kan gjenbrukes for enklere visning av toasts
+        Toast toast = Toast.makeText(getApplicationContext(), toastText, Toast.LENGTH_LONG);
         toast.show();
     }
 }
