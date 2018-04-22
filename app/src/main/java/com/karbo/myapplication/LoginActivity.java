@@ -31,13 +31,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void joinChatOnClick(View view) {
-
         //TODO:Sjekk om username inneholder ':'
         new connectToHost().execute();
     }
 
-    private void startMainActivity()
-    {
+    private void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -73,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             else {
                 showToast("Could not connect to server.");
             }
-            
+
             super.onPostExecute(aVoid);
         }
     }

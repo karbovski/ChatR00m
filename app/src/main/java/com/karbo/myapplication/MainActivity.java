@@ -40,13 +40,10 @@ public class MainActivity extends AppCompatActivity {
         startService(new Intent(getApplicationContext(),ChatService.class));//Starter service. Riktig sted?
     }
 
-    public void sendClick(View view)
-    {
+    public void sendClick(View view) {
         String message = messageText.getText().toString();
         new sendMessage().execute(message);
     }
-
-
 
     private class MessageReceiver extends BroadcastReceiver{
 
@@ -78,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void addMessageOnScreen(String username, String messageString){
+    private void addMessageOnScreen(String username, String messageString) {
         // vi henter XML fra res/layout/message.xml og setter det in i parent layout, i det tilfellet>messagesLayout
         // den funker ikke enna
         View message = getLayoutInflater().inflate(R.layout.message, messagesLayout);
@@ -88,10 +85,5 @@ public class MainActivity extends AppCompatActivity {
 
         usernameEditText.setText(username);
         messageEditText.setText(messageString);
-
-
     }
-
-
-
 }
