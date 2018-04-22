@@ -24,11 +24,11 @@ public class ChatService extends Service {
                 try {
                     while(true) {
                         String rawMessage = SocketHandler.in.readLine();
-                        int colonPosition=rawMessage.indexOf(':');
+                        int colonPosition = rawMessage.indexOf(':');
 
-                        String username=rawMessage.substring(0,colonPosition);
-                        String message=rawMessage.substring(colonPosition+1);
-                        sendChatMessageAsBroadcast(username,message);
+                        String username = rawMessage.substring(0, colonPosition);
+                        String message = rawMessage.substring(colonPosition + 1);
+                        sendChatMessageAsBroadcast(username, message);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
