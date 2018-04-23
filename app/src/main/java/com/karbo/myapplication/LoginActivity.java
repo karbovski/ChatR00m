@@ -12,6 +12,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.net.Socket;
 
+// TODO nå kan man gå tilbake til pålogging skjermen ved å tryke tilbake-knappen
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText serverIPText;
@@ -65,12 +67,10 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             //Dersom doInBackground lykkes, startes ny activity. Ellers vises en feilmelding som Toast
 
-            if(connected == true) {
+            if(connected)
                 startMainActivity();
-            }
-            else {
+            else
                 showToast("Could not connect to server.");
-            }
 
             super.onPostExecute(aVoid);
         }
@@ -84,5 +84,9 @@ public class LoginActivity extends AppCompatActivity {
         // en metode som kan gjenbrukes for enklere visning av toasts
         Toast toast = Toast.makeText(getApplicationContext(), toastText, Toast.LENGTH_LONG);
         toast.show();
+    }
+
+    public boolean validateInputFromUser() {
+        return false;
     }
 }

@@ -16,8 +16,8 @@ public class SocketHandler {
         return socket;
     }
 
-    public static void setSocket(Socket socket, String username) {
-        socket = socket;
+    public static void setSocket(Socket _socket, String username) {
+        socket = _socket;
         try {
             out = new PrintWriter(socket.getOutputStream());
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
