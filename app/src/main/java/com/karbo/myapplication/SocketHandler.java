@@ -12,24 +12,19 @@ public class SocketHandler {
     public static PrintWriter out;
     public static BufferedReader in;
 
-
     public static Socket getSocket() {
         return socket;
     }
 
-    public static void setSocket(Socket _socket,String username) {
-        socket=_socket;
+    public static void setSocket(Socket socket, String username) {
+        socket = socket;
         try {
             out = new PrintWriter(socket.getOutputStream());
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out.println(username);//Sender brukernavn til server etter at alt annet er klart
+            out.println(username);
             out.flush();
-        }catch (IOException e){
-
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-
     }
-
-
-
 }

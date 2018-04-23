@@ -25,11 +25,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        messageText=findViewById(R.id.messageText);
+
+        messageText = findViewById(R.id.messageText);
         messagesLayout = findViewById(R.id.messagesLayout);
 
-        // TODO sjekke om Socket er NULL, hvis ja > gå tilbake til pålogingside ??? kanskje
-        //TODO startService
         // ny intent filter
         IntentFilter intentFilter = new IntentFilter();
 
@@ -41,20 +40,15 @@ public class MainActivity extends AppCompatActivity {
         startService(new Intent(getApplicationContext(),ChatService.class));//Starter service. Riktig sted?
     }
 
-    public void sendClick(View view)
-    {
-        String message=messageText.getText().toString();
+    public void sendClick(View view) {
+        String message = messageText.getText().toString();
         new sendMessage().execute(message);
     }
-
-
 
     private class MessageReceiver extends BroadcastReceiver{
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            // TODO koden som skal utføres når en broadcast ble mottat
-
             // her hentes det .putExtra fieldene fra intent fra broadcast
             String username = intent.getStringExtra("username");
             String messageText = intent.getStringExtra("messageText");
@@ -64,20 +58,13 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Crab2",username+messageText);
             messagesLayout.addView(newMessage);
 
-            // TODO kode som oppretter ny booble på skjermen og seter inn username:messageText
-            // something like
-            // TextView nymelding = new Textview...
-            // nymelding.setText(username + messageText)
-            // newmessage = findbyidres(R.layout.message)
-            //newmessage.SETTEXT(messageText + " : " username)
-            // textAlignmen.set Right/lEFT (mine og noen andres meldinger)
-            // layout.addView(new message)
-            // nymelding > vis den på skjermen
+            // ny metode med XML mal, just testing
+            addMessageOnScreen(username,messageText);
+
         }
     }
 
-    private class sendMessage extends AsyncTask<String,Void,Void>
-    {
+    private class sendMessage extends AsyncTask<String,Void,Void> {
 
         @Override
         protected Void doInBackground(String... strings) {
@@ -88,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void addMessageOnScreen(String username, String messageString) {
+        // vi henter XML fra res/layout/message.xml og setter det in i parent layout, i det tilfellet>messagesLayout
+        // den funker ikke enna
+        View message = getLayoutInflater().inflate(R.layout.message, messagesLayout);
 
+        EditText messageEditText = message.findViewById(R.id.messageTextView);
+        EditText usernameEditText = message.findViewById(R.id.usernameTextView);
 
+        usernameEditText.setText(username);
+        messageEditText.setText(messageString);
+    }
 }
