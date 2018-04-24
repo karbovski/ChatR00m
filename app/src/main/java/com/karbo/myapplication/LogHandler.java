@@ -1,54 +1,43 @@
 package com.karbo.myapplication;
 
-import android.app.Application;
 import android.content.Context;
 import android.util.Log;
-
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class LogHandler {
 
-
-
-    static FileInputStream inputStream;
-
-    public void saveMessageToLog(String message, Context context) {
+    public static void saveMessageToLog(String message, Context context) {
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("log.txt", Context.MODE_PRIVATE));
-            outputStreamWriter.write(message);
-            outputStreamWriter.close();
+            File file = new File(context.getFilesDir(),"log.txt");
+            FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+            fileOutputStream.write((message + "\n").getBytes());
+
         }
         catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
     }
 
-    public ArrayList<String> getAllMessagesFromLog(Context context) {
+    public static ArrayList<String> getAllMessagesFromLog(Context context) {
 
-        ArrayList<String> allMessagesList = new ArrayList<String>();
+        ArrayList<String> allMessagesList = new ArrayList<>();
+
+        File file = new File(context.getFilesDir(),"log.txt");
 
         try {
-            InputStream inputStream = context.openFileInput("log.txt");
+            FileInputStream fileInputStream = new FileInputStream(file);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
 
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//                String receiveString = "";
-//                StringBuilder stringBuilder = new StringBuilder();
-//
-//                while ( (receiveString = bufferedReader.readLine()) != null ) {
-//                    stringBuilder.append(receiveString);
-//                }
-//
-//                inputStream.close();
-//                ret = stringBuilder.toString();
+            String tempString = "";
+            while ((tempString = bufferedReader.readLine()) != null) {
+                allMessagesList.add(tempString);
             }
         }
         catch (FileNotFoundException e) {
@@ -56,7 +45,6 @@ public class LogHandler {
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
         }
-
 
         return allMessagesList;
     }
