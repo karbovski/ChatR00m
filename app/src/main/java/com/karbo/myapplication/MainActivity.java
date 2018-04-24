@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             // her hentes det .putExtra fieldene fra intent fra broadcast
             String username = intent.getStringExtra("username");
             String messageText = intent.getStringExtra("messageText");
-            addMessageOnScreen(messageText+":"+username);
+            addMessageOnScreen(username+":"+messageText);
 
 
             // ny metode med XML mal, just testing
