@@ -12,8 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     EditText messageText;
     LinearLayout messagesLayout;
+    ScrollView scrollView;
+    TextView textView;
     final static String LOGOUT="logout";
     Intent chatService;
 
@@ -35,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         messageText = findViewById(R.id.messageText);
         messagesLayout = findViewById(R.id.messagesLayout);
+        scrollView=findViewById(R.id.scrollView);
+        textView=findViewById(R.id.onlineTextView);
 
         // ny intent filter
         IntentFilter intentFilter = new IntentFilter();
@@ -66,8 +72,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendClick(View view) {
         String message = messageText.getText().toString();
-        addMessageOnScreen(SocketHandler.username+": "+message);
-        new sendMessage().execute(message);
+        if(!message.equals("")) {
+            addMessageOnScreen(SocketHandler.username + ": " + message, true);//Viser melding lokalt
+            new sendMessage().execute(message);//sender til server
+
+            messageText.setText(""); //clear EditText
+            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);//Hide keyboard
+            mgr.hideSoftInputFromWindow(messageText.getWindowToken(), 0);
+            LogHandler.saveMessageToLog(SocketHandler.username + ':' + message, this.getApplicationContext());//til fil
+        }
     }
 
     private class MessageReceiver extends BroadcastReceiver{
@@ -77,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
             // her hentes det .putExtra fieldene fra intent fra broadcast
             String username = intent.getStringExtra("username");
             String messageText = intent.getStringExtra("messageText");
-            addMessageOnScreen(username+":"+messageText);
+            Log.i("CRAB2",username);
+            if(username.equals("SERVER")) textView.setText(messageText);
+            else addMessageOnScreen(username+":"+messageText,false);
 
 
             // ny metode med XML mal, just testing
@@ -115,21 +130,37 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void addMessageOnScreen(String messageText) {
+    private void addMessageOnScreen(String messageText,boolean local) {
 
 
         TextView newMessage = new TextView(getApplicationContext());
+        if(local) newMessage.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+
+        newMessage.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        newMessage.setTextSize(18);
         newMessage.setText(messageText);
+
 
         Log.i("Crab2",messageText);
         messagesLayout.addView(newMessage);
+
+
     }
 
     private void writeLogToScreen()
     {
         messagesLayout.removeAllViews();
         ArrayList<String> logArray=LogHandler.getAllMessagesFromLog(getApplicationContext());
-        for(String s:logArray) addMessageOnScreen(s);
+        for(String s:logArray)
+        {
+            String username=s.substring(0,s.indexOf(':'));
+            Boolean local;
+
+            if(username.equals(SocketHandler.username)) local=true;
+            else local=false;
+
+            addMessageOnScreen(s,local);
+        }
     }
 
     public void extrasOnClick(View view) {

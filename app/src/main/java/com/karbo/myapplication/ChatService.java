@@ -31,10 +31,10 @@ public class ChatService extends Service {
                         String username = rawMessage.substring(0, colonPosition);
                         String message = rawMessage.substring(colonPosition + 1);
                         sendChatMessageAsBroadcast(message,username);
-                        if(username!="SERVER")LogHandler.saveMessageToLog(rawMessage,getApplicationContext());
+                        if(!username.equals("SERVER"))LogHandler.saveMessageToLog(rawMessage,getApplicationContext());
 
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 finally {
@@ -75,4 +75,17 @@ public class ChatService extends Service {
     {
 
     }
+
+
+    @Override
+    public void onDestroy() {
+        try {
+            SocketHandler.socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        super.onDestroy();
+    }
+
+
 }
