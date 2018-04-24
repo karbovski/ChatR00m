@@ -131,4 +131,9 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> logArray=LogHandler.getAllMessagesFromLog(getApplicationContext());
         for(String s:logArray) addMessageOnScreen(s);
     }
+
+    public void extrasOnClick(View view) {
+        Intent intent = new Intent(this, Extras.class);
+        startActivity(intent);
+    }
 }

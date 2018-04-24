@@ -48,4 +48,15 @@ public class LogHandler {
 
         return allMessagesList;
     }
+
+    public static void deleteAllMessages(Context context) {
+        try {
+            String emptyString = "";
+            File file = new File(context.getFilesDir(),"log.txt");
+            FileOutputStream fileOutputStream = new FileOutputStream(file, false);
+            fileOutputStream.write(emptyString.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
