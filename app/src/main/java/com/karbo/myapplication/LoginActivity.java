@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         portText = findViewById(R.id.portText);
         loginButton=findViewById(R.id.loginButtton);
         connected = false;
+        SocketHandler.socket=null;
     }
 
     public void joinChatOnClick(View view) {
@@ -50,12 +51,14 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) { //Prøver å åpne socket
             try {
-                String ipAddress = serverIPText.getText().toString();
-                int portNumber = Integer.parseInt(portText.getText().toString());
+                if(SocketHandler.getSocket()==null) {
+                    String ipAddress = serverIPText.getText().toString();
+                    int portNumber = Integer.parseInt(portText.getText().toString());
 
-                Socket socket = new Socket(ipAddress, portNumber);
-                String username = usernameText.getText().toString();
-                SocketHandler.setSocket(socket, username);
+                    Socket socket = new Socket(ipAddress, portNumber);
+                    String username = usernameText.getText().toString();
+                    SocketHandler.setSocket(socket, username);
+                }
                 connected = true;
             } catch (IOException e) {
                 showToast("Check your IP or port number!");
