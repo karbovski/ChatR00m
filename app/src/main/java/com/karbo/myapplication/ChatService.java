@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
 public class ChatService extends Service {
 
-    private static Socket chatSocket;
+    //private static Socket chatSocket;
 
     public ChatService() {
     }
@@ -28,11 +30,19 @@ public class ChatService extends Service {
 
                         String username = rawMessage.substring(0, colonPosition);
                         String message = rawMessage.substring(colonPosition + 1);
-                        sendChatMessageAsBroadcast(username, message);
+                        sendChatMessageAsBroadcast(message,username);
+
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                finally {
+                    Intent logOutIntent=new Intent();
+                    Log.i("Crab2","Connection lost");
+                    logOutIntent.setAction(MainActivity.LOGOUT);
+                    sendBroadcast(logOutIntent);
+                }
+
             }
         }).start();
 
@@ -45,7 +55,7 @@ public class ChatService extends Service {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    private void sendChatMessageAsBroadcast(String username, String messageText) {
+    private void sendChatMessageAsBroadcast(String messageText,String username) {
         // trenger ny intent for å sende broadcast
         Intent chatMessageIntent = new Intent();
 
@@ -58,5 +68,10 @@ public class ChatService extends Service {
 
         // bruker intent vi har opprettet og sender den i broadcast
         sendBroadcast(chatMessageIntent);
+    }
+
+    private void writeMessageToFile(String username,String message)
+    {
+
     }
 }

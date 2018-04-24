@@ -11,13 +11,15 @@ public class SocketHandler {
     private static Socket socket;
     public static PrintWriter out;
     public static BufferedReader in;
+    public static String username;
 
     public static Socket getSocket() {
         return socket;
     }
 
-    public static void setSocket(Socket _socket, String username) {
+    public static void setSocket(Socket _socket, String _username) {
         socket = _socket;
+        username=_username;
         try {
             out = new PrintWriter(socket.getOutputStream());
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));

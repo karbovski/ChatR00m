@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText serverIPText;
     EditText usernameText;
     EditText portText;
+    Button loginButton;
     boolean connected; //Dersom false, vil ikke Main Activity starte
 
     @Override
@@ -29,11 +31,13 @@ public class LoginActivity extends AppCompatActivity {
         serverIPText = findViewById(R.id.serverIPText);
         usernameText = findViewById(R.id.usernameText);
         portText = findViewById(R.id.portText);
+        loginButton=findViewById(R.id.loginButtton);
         connected = false;
     }
 
     public void joinChatOnClick(View view) {
         //TODO:Sjekk om username inneholder ':'
+        loginButton.setEnabled(false);
         new connectToHost().execute();
     }
 
@@ -71,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 startMainActivity();
             else
                 showToast("Could not connect to server.");
-
+                loginButton.setEnabled(true);
             super.onPostExecute(aVoid);
         }
     }
