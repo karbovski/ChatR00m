@@ -54,7 +54,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(SocketHandler.getSocket()==null) logOut(); //Om man er i pause, vil ikke broadcastreciver få beskjed, derfor sjekkes det også her
+        //if(SocketHandler.getSocket()==null) logOut(); 
+    }
+
+
+    @Override
+    public void onBackPressed() {//Sørger for at man ikke kan gå tilbake
+        super.onBackPressed();
     }
 
     public void sendClick(View view) {

@@ -8,7 +8,7 @@ import java.net.Socket;
 
 public class SocketHandler {
 
-    private static Socket socket;
+    public static Socket socket;
     public static PrintWriter out;
     public static BufferedReader in;
     public static String username;
