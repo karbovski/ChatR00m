@@ -31,6 +31,7 @@ public class ChatService extends Service {
                         String username = rawMessage.substring(0, colonPosition);
                         String message = rawMessage.substring(colonPosition + 1);
                         sendChatMessageAsBroadcast(message,username);
+                        if(username!="SERVER")LogHandler.saveMessageToLog(rawMessage,getApplicationContext());
 
                     }
                 } catch (IOException e) {
@@ -70,7 +71,7 @@ public class ChatService extends Service {
         sendBroadcast(chatMessageIntent);
     }
 
-    private void writeMessageToFile(String username,String message)
+    private void writeFileToScreen(String username,String message)
     {
 
     }

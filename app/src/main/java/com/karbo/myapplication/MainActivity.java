@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //if(SocketHandler.getSocket()==null) logOut(); 
+        writeLogToScreen();
     }
 
 
     @Override
     public void onBackPressed() {//Sørger for at man ikke kan gå tilbake
-        super.onBackPressed();
+        //super.onBackPressed();
     }
 
     public void sendClick(View view) {
@@ -115,20 +116,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addMessageOnScreen(String messageText) {
-        // vi henter XML fra res/layout/message.xml og setter det in i parent layout, i det tilfellet>messagesLayout
-        // den funker ikke enna
-        //View message = getLayoutInflater().inflate(R.layout.message, messagesLayout);
 
-        //EditText messageEditText = message.findViewById(R.id.messageTextView);
-        //EditText usernameEditText = message.findViewById(R.id.usernameTextView);
-
-        //usernameEditText.setText(username);
-        //messageEditText.setText(messageString);
 
         TextView newMessage = new TextView(getApplicationContext());
         newMessage.setText(messageText);
 
         Log.i("Crab2",messageText);
         messagesLayout.addView(newMessage);
+    }
+
+    private void writeLogToScreen()
+    {
+        messagesLayout.removeAllViews();
+        ArrayList<String> logArray=LogHandler.getAllMessagesFromLog(getApplicationContext());
+        for(String s:logArray) addMessageOnScreen(s);
     }
 }
